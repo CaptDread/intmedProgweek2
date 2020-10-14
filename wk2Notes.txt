@@ -1,0 +1,2 @@
+from this point create the object or element, modify it, then add it.
+using let in a for loop makes it not global, var makes it global.
