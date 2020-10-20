@@ -17,19 +17,20 @@
 
 
 
-let lightboxify = function(selector, userOptions = {}){
+let lightboxify = function (selector, optOb = {
+}){
 
 
-    let defaults = {
-        overlayOpacity: 0.75,
-        // escapeClosesLightBox: true
-    }
+    // let defaults = {
+    //     overlayOpacity: 0.75,
+    // }
     
-    optOb = {...defaults, ...userOptions}
+    // optOb = {...defaults, ...userOptions}
     
-    // if (!optOb.hasOwnProperty('overlayOpacity'))    optOb.overlayOpacity = 0.75}
-    // if (!optOb.hasOwnProperty('escapeClosesLightBox'))  optOb.escapeClosesLightBox = true
-
+    if (!optOb.hasOwnProperty('overlayOpacity'))    optOb.overlayOpacity = 0.75
+    if (!optOb.hasOwnProperty(`borderColor`))       optOb.borderColor = `#fff`
+    if (!optOb.hasOwnProperty('borderRadius'))      optOb.borderRadius = `5px`
+    if (!optOb.hasOwnProperty(`buttSize`))          optOb.buttSize = `40px`
     
     
     let lightboxLinks = document.querySelectorAll(selector);
@@ -37,36 +38,65 @@ let lightboxify = function(selector, userOptions = {}){
     for (let z = 0; z < lightboxLinks.length; z++){
         lightboxLinks[z].addEventListener('click', function(e){
             e.preventDefault();
+
             let bkgd = document.createElement('div');
             bkgd.style.position = 'fixed'
             bkgd.style.top = 0
             bkgd.style.left= 0
-            bkgd.style.backgroundColor = `rgba (0, 0, 0, ${optOb.overlayOpacity})`
+            bkgd.style.backgroundColor = `rgba(0, 0, 0, ${optOb.overlayOpacity})`
             bkgd.style.width = '100vw'
             bkgd.style.height = '100vh'
             document.body.appendChild(bkgd);
 
             let litebx = document.createElement('div');
-            litebx.setAttribute('class', 'lightbox')
-            // litebx.style.position = 'fixed'
-            // litebx.style.top = '50%'
-            // litebx.style.left = '50%'
-            // litebx.style.msTransform = 'translate(-50%'
-            // litebx.style
-            // litebx.style
-            // litebx.style
-            // litebx.style
+            // litebx.setAttribute('class', 'lightbox')
+            litebx.style.position = 'fixed'
+            litebx.style.top = '25%'
+            litebx.style.left = '25%'
+            litebx.style.backgroundColor = `${optOb.borderColor}`
+            litebx.style.padding = `30px`
+            litebx.style.borderRadius = `${optOb.borderRadius}`
             bkgd.appendChild(litebx);
-
+            
             let exButt = document.createElement('button');
-            exButt.setAttribute('class', 'lightbox-close');
-            litebx.appendChild(exButt);
+            // exButt.setAttribute('class', 'lightbox-close');
+            exButt.style.position = `absolute`
+            exButt.style.top = `2.5%`
+            exButt.style.right = `2.5%`
+            exButt.style.width = `${optOb.buttSize}`
+            exButt.style.height = `${optOb.buttSize}`
+            exButt.style.border = 0
+            exButt.style.outline = `none`
+            exButt.style.background = `none`
+            exButt.style.backgroundSize = `contain`
+            exButt.style.backgroundImage = `URL(dist/img/close-button.png)`
 
+            litebx.appendChild(exButt);
+            
             let bigimg = document.createElement('img');
+            bigimg.style.display = `block`
+            bigimg.style.maxWidth = '90vw'
+            bigimg.style.maxHeight = `80vh`
+            bigimg.style.borderRadius = `${optOb.borderRadius}`
             bigimg.setAttribute('alt', lightboxLinks[z].alt);
             bigimg.setAttribute('src', lightboxLinks[z].href);
             litebx.appendChild(bigimg);
             
+            let closeLightBox = function(){
+                bkgd.remove()
+                litebx.remove()
+            }
+            
+            
+            document.addEventListener('keyup', function(event) {
+                if (event.key === `Escape`) {
+                    closeLightBox()
+                }
+            })
+            
+            
+            exButt.addEventListener('click', closeLightBox)
+            bkgd.addEventListener('click', closeLightBox)
         });
     }
 }

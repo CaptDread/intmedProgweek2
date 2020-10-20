@@ -128,12 +128,5 @@ body {
 	background-image: url(../img/close-button.png);
 }
 
-.litebx {
-	position: absolute;
-	top: 0%;
-	object-fit: cover;
-	background-color: rgba(51, 48, 48, 0.279);
-	z-index: 0;
-}
 
 /*# sourceMappingURL=main.css.map */
