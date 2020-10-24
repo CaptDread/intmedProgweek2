@@ -31,6 +31,7 @@ let lightboxify = function (selector, optOb = {
     if (!optOb.hasOwnProperty(`borderColor`))       optOb.borderColor = `#fff`
     if (!optOb.hasOwnProperty('borderRadius'))      optOb.borderRadius = `5px`
     if (!optOb.hasOwnProperty(`buttSize`))          optOb.buttSize = `40px`
+    if (!optOb.hasOwnProperty(`exButtImg`))         optOb.exButtImg = 'dist/img/close-button.png'
     
     
     let lightboxLinks = document.querySelectorAll(selector);
@@ -76,7 +77,7 @@ let lightboxify = function (selector, optOb = {
             exButt.style.outline = `none`
             exButt.style.background = `none`
             exButt.style.backgroundSize = `contain`
-            exButt.style.backgroundImage = `URL(dist/img/close-button.png)`
+            exButt.style.backgroundImage = `URL(${optOb.exButtImg})`
 
             litebx.appendChild(exButt);
             
