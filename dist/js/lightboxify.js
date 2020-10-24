@@ -48,12 +48,19 @@ let lightboxify = function (selector, optOb = {
             bkgd.style.height = '100vh'
             document.body.appendChild(bkgd);
 
+            // animation
+            bkgd.style.opacity = 0
+            bkgd.style.transition = 'opacity 0.55s'
+            setTimeout(() => {
+                bkgd.style.opacity = 1
+            }, 20);
+
             let litebx = document.createElement('div');
             // litebx.setAttribute('class', 'lightbox')
             litebx.style.position = 'fixed'
             litebx.style.top = '25%'
             litebx.style.left = '25%'
-            litebx.style.backgroundColor = `${optOb.borderColor}`
+            litebx.style.backgroundColor = optOb.borderColor
             litebx.style.padding = `30px`
             litebx.style.borderRadius = `${optOb.borderRadius}`
             bkgd.appendChild(litebx);
