@@ -30,8 +30,9 @@ let lightboxify = function (selector, optOb = {
     if (!optOb.hasOwnProperty('overlayOpacity'))    optOb.overlayOpacity = 0.75
     if (!optOb.hasOwnProperty(`borderColor`))       optOb.borderColor = `#fff`
     if (!optOb.hasOwnProperty('borderRadius'))      optOb.borderRadius = `5px`
-    if (!optOb.hasOwnProperty(`buttSize`))          optOb.buttSize = `40px`
+    if (!optOb.hasOwnProperty(`buttSize`))          optOb.buttSize = `30px`
     if (!optOb.hasOwnProperty(`exButtImg`))         optOb.exButtImg = 'dist/img/close-button.png'
+    if (!optOb.hasOwnProperty(`tranTime`))           optOb.tranTime = 20
     
     
     let lightboxLinks = document.querySelectorAll(selector);
@@ -54,7 +55,7 @@ let lightboxify = function (selector, optOb = {
             bkgd.style.transition = 'opacity 0.55s'
             setTimeout(() => {
                 bkgd.style.opacity = 1
-            }, 20);
+            }, `${optOb.tranTime}`);
 
             let litebx = document.createElement('div');
             // litebx.setAttribute('class', 'lightbox')

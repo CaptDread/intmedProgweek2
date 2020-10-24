@@ -8,5 +8,6 @@ lightboxify('.lightboxify', {
     borderColor: `#fff`,
     borderRadius: `50px`,
     buttSize: `30px`,
-    exButtImg: `dist/img/close-button.png`
+    exButtImg: `dist/img/close-button.png`,
+    tranTime: 5000,
 })
